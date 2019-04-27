@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom';
 import './App.css';
-import TaskList from './components/TaskList';
+import TaskContainer from './containers/TasksContainer';
 import TaskCreate from './components/TaskCreate';
 import TaskEdit from './components/TaskEdit';
 
@@ -16,7 +16,7 @@ function App() {
         </nav>
 
         <Switch>
-          <Route path="/" exact component={TaskList} />
+          <Route path="/" exact component={TaskContainer} />
           <Route path="/create" component={TaskCreate} />
           <Route path="/edit/:id" component={TaskEdit} />
         </Switch>

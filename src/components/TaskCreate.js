@@ -5,39 +5,24 @@ class TaskCreate extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state = {
-      author: '',
-      task: '',
-      email: ''
-    };
 
     this.onSubmit = this.onSubmit.bind(this);
-    this.changeAuthor = this.changeAuthor.bind(this);
-    this.changeEmail = this.changeEmail.bind(this);
-    this.changeTask = this.changeTask.bind(this);
   }
 
   onSubmit(e) {
     e.preventDefault();
-    console.log('handleSubmit');
-  }
+    const {username, email, text} = e.target;
 
-  changeAuthor(e) {
-    this.setState({
-      author: e.target.value
-    })
-  }
+    let form = new FormData();
+    form.append('username', username.value);
+    form.append('email', email.value);
+    form.append('text', text.value);
 
-  changeEmail(e) {
-    this.setState({
-      email: e.target.value
-    })
-  }
+    this.props.createTask(form);
 
-  changeTask(e) {
-    this.setState({
-      task: e.target.value
-    })
+    username.value = '';
+    email.value = '';
+    text.value = '';
   }
 
   render () {
@@ -47,19 +32,16 @@ class TaskCreate extends React.Component {
         <form onSubmit={this.onSubmit}>
           <input
             type="text"
-            value={this.state.author}
-            placeholder="Ваше имя"
-            onChange={this.changeAuthor} />
+            name="username"
+            placeholder="Ваше имя" />
           <input
             type="email"
-            value={this.state.email}
-            placeholder="Ваш email"
-            onChange={this.changeEmail} />
+            name="email"
+            placeholder="Ваш email" />
           <textarea
-            value={this.state.task}
+            name="text"
             rows="4"
-            placeholder="Ваша задача"
-            onChange={this.changeTask} />
+            placeholder="Ваша задача" />
           <button type="submit">Сохранить</button>
         </form>
       </main>

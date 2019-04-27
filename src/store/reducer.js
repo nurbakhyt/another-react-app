@@ -1,6 +1,7 @@
 import {
   TASKS_REQUEST,
-  TASKS_RECEIVE
+  TASKS_RECEIVE,
+  TASK_CREATED
 } from './actions'
 
 const initialState = {
@@ -23,6 +24,14 @@ export default function tasks(state = initialState, action = {}) {
         tasks: action.data.tasks,
         totalCount: action.data.total_task_count,
         isLoading: false
+      };
+    case TASK_CREATED:
+      return {
+        ...state,
+        tasks: [
+          ...state.tasks,
+          action.data
+        ]
       };
     default:
       return state;

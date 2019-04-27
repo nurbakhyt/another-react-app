@@ -4,13 +4,31 @@ import './task.css';
 
 class TaskItem extends React.Component {
   render () {
+    const {
+      id,
+      username,
+      email,
+      text,
+      status
+    } = this.props.task;
+
     return (
       <article className="task">
-        <div className="task__author">Craig (craig@jons.com)</div>
-        <div className="task__body">
-          Задача
+        <div className="task__author">
+          {username} ({email})
         </div>
-        <Link to="/edit/2" className="task__edit">Изменить</Link>
+        <div className="task__body">
+          #{id} / {text}
+        </div>
+        <div className="task__status">
+          {status}
+        </div>
+        <Link
+          to={`/edit/${id}`}
+          className="task__edit"
+        >
+          Изменить
+        </Link>
       </article>
     )
   }

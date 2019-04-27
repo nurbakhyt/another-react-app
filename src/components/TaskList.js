@@ -15,8 +15,6 @@ class TaskList extends React.Component {
         <h2>Список задач <small>({totalCount})</small></h2>
         {isLoading && <p>Загрузка...</p>}
         {tasks.map(task => <TaskItem key={task.id} task={task} />)}
-        <TaskItem />
-        <TaskItem />
       </main>
     )
   }

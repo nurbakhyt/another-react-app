@@ -22,7 +22,7 @@ export default function tasks(state = initialState, action = {}) {
       return {
         ...state,
         tasks: action.data.tasks,
-        totalCount: action.data.total_task_count,
+        totalCount: Number(action.data.total_task_count),
         isLoading: false
       };
     case TASK_CREATED:

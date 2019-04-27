@@ -1,0 +1,26 @@
+.task {
+    display: flex;
+    margin-bottom: 1em;
+    position: relative;
+}
+.task:hover .task__edit {
+    display: block;
+}
+.task__author {
+    flex-basis: 35%;
+    padding: 0.5em;
+}
+.task__body {
+    flex-grow: 1;
+    padding: 0.5em;
+}
+.task__edit {
+    color: #359;
+    background: #ccc;
+    display: none;
+    padding: 0 0.5em;
+    position: absolute;
+    top: 0.5em;
+    right: 0.5em;
+    text-decoration: none;
+}

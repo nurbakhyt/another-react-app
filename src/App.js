@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom';
 import './App.css';
 import TaskContainer from './containers/TasksContainer';
 import TaskCreateContainer from './containers/TaskCreateContainer';
-import TaskEdit from './components/TaskEdit';
+import TaskEditContainer from './containers/TaskEditContainer';
 
 function App() {
   return (
@@ -18,7 +18,7 @@ function App() {
         <Switch>
           <Route path="/" exact component={TaskContainer} />
           <Route path="/create" component={TaskCreateContainer} />
-          <Route path="/edit/:id" component={TaskEdit} />
+          <Route path="/edit/:id" component={TaskEditContainer} />
         </Switch>
       </div>
     </Router>

@@ -1,4 +1,4 @@
-import { connect } from 'react-redux';
+import {connect} from 'react-redux';
 import TasksList from '../components/TaskList';
 import {fetchTasks} from '../store/actions';
 

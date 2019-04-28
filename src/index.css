@@ -19,3 +19,8 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+
+label {
+  padding: 0.25em 0.5em;
+  margin-bottom: 0.1em;
+}

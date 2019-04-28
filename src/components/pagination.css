@@ -1,0 +1,29 @@
+.paginator {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 1em;
+}
+
+.paginator__item {
+    background-color: #fff;
+    border: 1px solid #ccc;
+    color: #060b34;
+    cursor: pointer;
+    padding: 0.5em;
+    margin-left: 0.1em;
+    margin-right: 0.1em;
+    text-decoration: none;
+}
+
+.paginator__item:first-child {
+    margin-left: 0;
+}
+
+.paginator__item:last-child {
+    margin-right: 0;
+}
+
+.paginator__item--current {
+    background: #ccc;
+}

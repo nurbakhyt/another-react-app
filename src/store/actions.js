@@ -8,6 +8,7 @@ export const TASKS_REQUEST = 'TASKS_REQUEST';
 export const TASKS_RECEIVE = 'TASKS_RECEIVE';
 export const TASK_CREATED = 'TASK_CREATED';
 export const TASK_GET = 'TASK_GET';
+export const SET_PAGE = 'SET_PAGE';
 
 const requestTasks = () => ({
   type: TASKS_REQUEST
@@ -28,10 +29,19 @@ const getTask = id => ({
   id
 });
 
-export const fetchTasks = () => async(dispatch) => {
+const setPage = page => ({
+  type: SET_PAGE,
+  page
+});
+
+export const fetchTasks = ({page}) => async(dispatch) => {
   dispatch(requestTasks());
   try {
-    const response = await axios.get(`${API_URL}?developer=${DEV_NAME}`);
+    let url = `${API_URL}?developer=${DEV_NAME}`;
+    if (page > 1) {
+      url = url + `&page=${page}`;
+    }
+    const response = await axios.get(url);
 
     if (response.data.status === 'ok') {
       dispatch(receiveTasks(response.data.message));
@@ -39,6 +49,11 @@ export const fetchTasks = () => async(dispatch) => {
   } catch (error) {
     console.error('fetchTasks', error);
   }
+};
+
+export const goToPage = page => async(dispatch) => {
+  dispatch(await fetchTasks({page}));
+  dispatch(setPage(page));
 };
 
 export const createTask = task => async(dispatch) => {

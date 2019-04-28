@@ -2,7 +2,8 @@ import {
   TASKS_REQUEST,
   TASKS_RECEIVE,
   TASK_CREATED,
-  TASK_GET
+  TASK_GET,
+  SET_PAGE
 } from './actions'
 
 const initialState = {
@@ -10,7 +11,10 @@ const initialState = {
   tasks: [],
   task: null,
   totalCount: 0,
-  page: 1
+  perPage: 3,
+  page: 1,
+  sortField: null,
+  sortDirection: null
 };
 
 export default function tasks(state = initialState, action = {}) {
@@ -19,6 +23,11 @@ export default function tasks(state = initialState, action = {}) {
       return {
         ...state,
         isLoading: true
+      };
+    case SET_PAGE:
+      return {
+        ...state,
+        page: action.page
       };
     case TASKS_RECEIVE:
       return {

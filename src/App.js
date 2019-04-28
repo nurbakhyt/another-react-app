@@ -12,7 +12,6 @@ function App() {
         <nav className="app-nav">
           <Link to="/" className="app-nav__item">Задачи</Link>
           <Link to="/create" className="app-nav__item">Создать</Link>
-          <Link to="/edit/1" className="app-nav__item">Редактировать</Link>
         </nav>
 
         <Switch>

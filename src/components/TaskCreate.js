@@ -26,9 +26,11 @@ class TaskCreate extends React.Component {
   }
 
   render () {
+    const {isLoading} = this.props;
+
     return (
       <main>
-        <h2>Создание задачи</h2>
+        <h2>Создание задачи <small>{isLoading && 'Отправка...'}</small></h2>
         <form onSubmit={this.onSubmit}>
           <input
             type="text"

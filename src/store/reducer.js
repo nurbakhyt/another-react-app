@@ -62,6 +62,7 @@ export default function tasks(state = initialState, action = {}) {
     case TASK_CREATED:
       return {
         ...state,
+        isLoading: false,
         tasks: [
           ...state.tasks,
           action.data

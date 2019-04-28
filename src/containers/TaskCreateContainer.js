@@ -4,10 +4,7 @@ import {createTask} from '../store/actions';
 
 function mapStateToProps(state) {
   return {
-    isLoading: state.default.isLoading,
-    tasks: state.default.tasks,
-    totalCount: state.default.totalCount,
-    page: state.default.page
+    isLoading: state.default.isLoading
   };
 }
 

@@ -2,16 +2,26 @@ import {connect} from 'react-redux';
 import TasksList from '../components/TaskList';
 import {
   fetchTasks,
-  goToPage
+  goToPage,
+  changeSortField,
+  changeSortDirection
 } from '../store/actions';
 
 function mapStateToProps(state) {
+  const {
+    isLoading,
+    tasks,
+    totalCount,
+    perPage,
+    navParams
+  } = state.default;
+
   return {
-    isLoading: state.default.isLoading,
-    tasks: state.default.tasks,
-    totalCount: state.default.totalCount,
-    perPage: state.default.perPage,
-    page: state.default.page
+    isLoading,
+    tasks,
+    totalCount,
+    perPage,
+    navParams
   };
 }
 
@@ -22,6 +32,12 @@ function mapDispatchToProps(dispatch) {
     },
     goToPage(page) {
       dispatch(goToPage(page));
+    },
+    changeSortField(field) {
+      dispatch(changeSortField(field));
+    },
+    changeSortDirection(field) {
+      dispatch(changeSortDirection(field));
     }
   }
 };

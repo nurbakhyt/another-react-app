@@ -3,7 +3,9 @@ import {
   TASKS_RECEIVE,
   TASK_CREATED,
   TASK_GET,
-  SET_PAGE
+  SET_PAGE,
+  SET_SORT_FIELD,
+  SET_SORT_DIRECTION
 } from './actions'
 
 const initialState = {
@@ -12,9 +14,11 @@ const initialState = {
   task: null,
   totalCount: 0,
   perPage: 3,
-  page: 1,
-  sortField: null,
-  sortDirection: null
+  navParams: {
+    page: 1,
+    sortField: null,
+    sortDirection: null
+  }
 };
 
 export default function tasks(state = initialState, action = {}) {
@@ -27,7 +31,26 @@ export default function tasks(state = initialState, action = {}) {
     case SET_PAGE:
       return {
         ...state,
-        page: action.page
+        navParams: {
+          ...state.navParams,
+          page: action.page
+        }
+      };
+    case SET_SORT_FIELD:
+      return {
+        ...state,
+        navParams: {
+          ...state.navParams,
+          sortField: action.field
+        }
+      };
+    case SET_SORT_DIRECTION:
+      return {
+        ...state,
+        navParams: {
+          ...state.navParams,
+          sortDirection: action.direct
+        }
       };
     case TASKS_RECEIVE:
       return {

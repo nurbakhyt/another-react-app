@@ -9,6 +9,8 @@ export const TASKS_RECEIVE = 'TASKS_RECEIVE';
 export const TASK_CREATED = 'TASK_CREATED';
 export const TASK_GET = 'TASK_GET';
 export const SET_PAGE = 'SET_PAGE';
+export const SET_SORT_FIELD = 'SET_SORT_FIELD';
+export const SET_SORT_DIRECTION = 'SET_SORT_DIRECTION';
 
 const requestTasks = () => ({
   type: TASKS_REQUEST
@@ -34,12 +36,35 @@ const setPage = page => ({
   page
 });
 
-export const fetchTasks = ({page}) => async(dispatch) => {
+const setSortField = field => ({
+  type: SET_SORT_FIELD,
+  field
+});
+
+const setSortDirection = direct => ({
+  type: SET_SORT_DIRECTION,
+  direct
+});
+
+export const fetchTasks = (navParams = {}) => async(dispatch) => {
   dispatch(requestTasks());
   try {
+    const {
+      page,
+      sortField,
+      sortDirection
+    } = navParams;
+
     let url = `${API_URL}?developer=${DEV_NAME}`;
-    if (page > 1) {
+
+    if (!!page) {
       url = url + `&page=${page}`;
+    }
+    if (!!sortField) {
+      url = url + `&sort_field=${sortField}`
+    }
+    if (!!sortDirection) {
+      url = url + `&sort_direction=${sortDirection}`
     }
     const response = await axios.get(url);
 
@@ -51,9 +76,19 @@ export const fetchTasks = ({page}) => async(dispatch) => {
   }
 };
 
-export const goToPage = page => async(dispatch) => {
-  dispatch(await fetchTasks({page}));
-  dispatch(setPage(page));
+export const goToPage = navParams => async(dispatch) => {
+  dispatch(await fetchTasks(navParams));
+  dispatch(setPage(navParams.page));
+};
+
+export const changeSortField = navParams => async(dispatch) => {
+  dispatch(await fetchTasks(navParams));
+  dispatch(setSortField(navParams.sortField));
+};
+
+export const changeSortDirection = navParams => async(dispatch) => {
+  dispatch(await fetchTasks(navParams));
+  dispatch(setSortDirection(navParams.sortDirection));
 };
 
 export const createTask = task => async(dispatch) => {

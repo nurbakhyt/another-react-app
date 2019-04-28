@@ -1,0 +1,31 @@
+.sorting-bar {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    padding: 1em 0;
+}
+
+.sort-types {
+    display: flex;
+    margin-bottom: 0.5em;
+}
+.sort-types__item {
+    background: #eee;
+    color: #000;
+    cursor: pointer;
+    padding: 0.25em 0.5em;
+    text-decoration: none;
+}
+.sort-types__item:first-child {
+    border-top-left-radius: 1em;
+    border-bottom-left-radius: 1em;
+    padding-left: 1em;
+}
+.sort-types__item:last-child {
+    border-top-right-radius: 1em;
+    border-bottom-right-radius: 1em;
+    padding-right: 1em;
+}
+.sort-types__item--selected {
+    background: #ccc;
+}

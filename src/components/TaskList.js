@@ -1,7 +1,7 @@
 import React from 'react';
-import Paginator from './Paginator';
-import './pagination.css';
+import Paginator from './pagination/Paginator';
 import TaskItem from './TaskItem';
+import SortingBar from './sorting/SortingBar';
 
 class TaskList extends React.Component {
 
@@ -21,7 +21,9 @@ class TaskList extends React.Component {
       tasks,
       totalCount,
       perPage,
-      page,
+      navParams,
+      changeSortField,
+      changeSortDirection
     } = this.props;
     const pagesCount = Math.ceil(totalCount / perPage);
     let pages = new Array(pagesCount).fill(1);
@@ -31,14 +33,20 @@ class TaskList extends React.Component {
         <h2>
           Список задач
           <small>
-            ({page}/{pagesCount}) {isLoading && 'Загрузка...'}
+            ({navParams.page}/{pagesCount}) {isLoading && 'Загрузка...'}
           </small>
         </h2>
+
+        <SortingBar
+          navParams={navParams}
+          changeSortField={changeSortField}
+          changeSortDirection={changeSortDirection}
+        />
 
         {tasks.map(task => <TaskItem key={task.id.toString()} task={task}/>)}
 
         <Paginator
-          page={page}
+          navParams={navParams}
           pages={pages}
           goToPage={this.goToPage.bind(this)}
         />

@@ -23,7 +23,8 @@ class TaskList extends React.Component {
       perPage,
       navParams,
       changeSortField,
-      changeSortDirection
+      changeSortDirection,
+      user
     } = this.props;
     const pagesCount = Math.ceil(totalCount / perPage);
     let pages = new Array(pagesCount).fill(1);
@@ -43,7 +44,11 @@ class TaskList extends React.Component {
           changeSortDirection={changeSortDirection}
         />
 
-        {tasks.map(task => <TaskItem key={task.id.toString()} task={task}/>)}
+        {tasks.map(task => <TaskItem
+          key={task.id.toString()}
+          task={task}
+          canEdit={user.authenticated}/>)
+        }
 
         <Paginator
           navParams={navParams}

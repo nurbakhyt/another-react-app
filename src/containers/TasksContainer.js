@@ -13,7 +13,8 @@ function mapStateToProps(state) {
     tasks,
     totalCount,
     perPage,
-    navParams
+    navParams,
+    user
   } = state.default;
 
   return {
@@ -21,7 +22,8 @@ function mapStateToProps(state) {
     tasks,
     totalCount,
     perPage,
-    navParams
+    navParams,
+    user
   };
 }
 

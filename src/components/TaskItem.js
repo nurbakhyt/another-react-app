@@ -12,6 +12,8 @@ class TaskItem extends React.Component {
       status
     } = this.props.task;
 
+    const {canEdit} = this.props;
+
     return (
       <article className="task">
         <div className="task__author">
@@ -23,12 +25,16 @@ class TaskItem extends React.Component {
         <div className="task__status">
           {status}
         </div>
-        <Link
-          to={`/edit/${id}`}
-          className="task__edit"
-        >
-          Изменить
-        </Link>
+        {canEdit
+          ? <Link
+            to={`/edit/${id}`}
+            className="task__edit"
+          >
+            Изменить
+          </Link>
+          : ''
+        }
+
       </article>
     )
   }

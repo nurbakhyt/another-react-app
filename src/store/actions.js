@@ -1,8 +1,9 @@
 import axios from 'axios';
 import md5 from 'js-md5';
+require('dotenv').config();
 
-const API_URL = 'https://uxcandy.com/~shapoval/test-task-backend/';
-const DEV_NAME = 'Nurbakhyt';
+const API_URL = process.env.REACT_APP_API_URL;
+const DEV_NAME = process.env.REACT_APP_DEV_NAME;
 
 export const TASKS_REQUEST = 'TASKS_REQUEST';
 export const TASKS_RECEIVE = 'TASKS_RECEIVE';

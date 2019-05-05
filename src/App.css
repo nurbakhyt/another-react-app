@@ -13,6 +13,8 @@
 }
 
 .app-nav__item {
+  color: #3951a7;
+  cursor: pointer;
   padding: 1em 0.5em;
   text-decoration: none;
 }

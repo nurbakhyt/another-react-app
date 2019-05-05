@@ -5,7 +5,11 @@ import {
   TASK_GET,
   SET_PAGE,
   SET_SORT_FIELD,
-  SET_SORT_DIRECTION
+  SET_SORT_DIRECTION,
+  AUTH_PROCESSING,
+  LOGIN_SUCCESS,
+  LOGIN_FAILED,
+  LOGOUT_ACTION,
 } from './actions'
 
 const initialState = {
@@ -18,12 +22,18 @@ const initialState = {
     page: 1,
     sortField: null,
     sortDirection: null
+  },
+  user: {
+    authenticated: false,
+    failed: false,
+    username: ''
   }
 };
 
 export default function tasks(state = initialState, action = {}) {
   switch (action.type) {
     case TASKS_REQUEST:
+    case AUTH_PROCESSING:
       return {
         ...state,
         isLoading: true
@@ -74,6 +84,32 @@ export default function tasks(state = initialState, action = {}) {
       return {
         ...state,
         task
+      };
+    case LOGIN_SUCCESS:
+      return {
+        ...state,
+        isLoading: false,
+        user: {
+          authenticated: true,
+          failed: false,
+          username: action.username
+        }
+      };
+    case LOGIN_FAILED:
+      return {
+        ...state,
+        isLoading: false,
+        user: {
+          authenticated: false,
+          failed: true,
+          username: ''
+        }
+      };
+    case LOGOUT_ACTION:
+      return {
+        ...state,
+        isLoading: false,
+        user: initialState.user
       };
     default:
       return state;

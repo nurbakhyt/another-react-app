@@ -11,40 +11,43 @@ export const TASK_GET = 'TASK_GET';
 export const SET_PAGE = 'SET_PAGE';
 export const SET_SORT_FIELD = 'SET_SORT_FIELD';
 export const SET_SORT_DIRECTION = 'SET_SORT_DIRECTION';
+export const AUTH_PROCESSING = 'AUTH_PROCESSING';
+export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
+export const LOGIN_FAILED = 'LOGIN_FAILED';
+export const LOGOUT_ACTION = 'LOGOUT_ACTION';
 
-const requestTasks = () => ({
-  type: TASKS_REQUEST
-});
-
+const requestTasks = () => ({ type: TASKS_REQUEST });
 const receiveTasks = data => ({
   type: TASKS_RECEIVE,
   data
 });
-
 const createdTask = data => ({
   type: TASK_CREATED,
   data
 });
-
 const getTask = id => ({
   type: TASK_GET,
   id
 });
-
 const setPage = page => ({
   type: SET_PAGE,
   page
 });
-
 const setSortField = field => ({
   type: SET_SORT_FIELD,
   field
 });
-
 const setSortDirection = direct => ({
   type: SET_SORT_DIRECTION,
   direct
 });
+const authProcess = () => ({ type: AUTH_PROCESSING });
+const loginSuccess = username => ({
+  type: LOGIN_SUCCESS,
+  username
+});
+const loginFailed = () => ({ type: LOGIN_FAILED });
+const logoutAction = () => ({ type: LOGOUT_ACTION });
 
 export const fetchTasks = (navParams = {}) => async(dispatch) => {
   dispatch(requestTasks());
@@ -75,22 +78,18 @@ export const fetchTasks = (navParams = {}) => async(dispatch) => {
     console.error('fetchTasks', error);
   }
 };
-
 export const goToPage = navParams => async(dispatch) => {
   dispatch(await fetchTasks(navParams));
   dispatch(setPage(navParams.page));
 };
-
 export const changeSortField = navParams => async(dispatch) => {
   dispatch(await fetchTasks(navParams));
   dispatch(setSortField(navParams.sortField));
 };
-
 export const changeSortDirection = navParams => async(dispatch) => {
   dispatch(await fetchTasks(navParams));
   dispatch(setSortDirection(navParams.sortDirection));
 };
-
 export const createTask = task => async(dispatch) => {
   dispatch(requestTasks());
   try {
@@ -103,11 +102,9 @@ export const createTask = task => async(dispatch) => {
     console.error('createTask', error);
   }
 };
-
 export const editTask = id => dispatch => {
   dispatch(getTask(id));
 };
-
 export const updateTask = ({id, queryString}) => async(dispatch) => {
   dispatch(requestTasks());
   try {
@@ -119,8 +116,24 @@ export const updateTask = ({id, queryString}) => async(dispatch) => {
 
     const response = await axios.post(url, formData);
 
-    console.log('response', response);
   } catch(error) {
     console.error('updateTask', error);
   }
+};
+export const login = ({username, password}) => async(dispatch) => {
+  dispatch(authProcess());
+
+  setTimeout(() => {
+    if (username === 'admin' && password === '123') {
+      dispatch(loginSuccess(username));
+    } else {
+      dispatch(loginFailed());
+    }
+  }, 500);
+};
+export const logout = () => async(dispatch) => {
+  dispatch(authProcess());
+  setTimeout(() => {
+    dispatch(logoutAction());
+  }, 500);
 };
